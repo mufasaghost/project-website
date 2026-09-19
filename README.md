@@ -41,3 +41,20 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://github.com/withastro/astro) or jump into our [Discord server](https://astro.build/chat).
+
+## Jev (TypeSafe AI)
+
+This repo is currently a static site with no server-side handler (contact
+form, API route, etc.) to hang a real classification use case on. So Jev —
+[TypeSafe AI](https://typesafe.ai)'s fast, typed-decision model — is wired
+in as a small, isolated, ready-to-use module rather than forced into a page:
+
+- `src/lib/jev.ts` — the wrapper (`askJev`). Lazily imports
+  `@typesafe-ai/sdk`, reads `TYPESAFE_API_KEY` from the environment only,
+  and degrades gracefully (a clear `JevUnavailableError`, never a crash) if
+  the package isn't installed or the key isn't set.
+- `src/lib/jev.example.ts` — a worked example (contact-message triage) for
+  when this site gets a real form/API handler to plug it into.
+
+Set `TYPESAFE_API_KEY` in the environment to use it; see the
+[docs](https://docs.typesafe.ai/) for details.
